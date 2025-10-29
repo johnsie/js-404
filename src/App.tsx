@@ -384,39 +384,41 @@ function App() {
             {/* Filter Sliders */}
             <div className="synth-section">
               <div className="section-title">Filter</div>
-              <div style={{ marginBottom: '12px' }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '11px', color: '#00d9ff', fontWeight: 'bold', marginBottom: '4px' }}>
-                  <span>Cutoff</span>
-                  <span>{params.cutoff.toFixed(0)} Hz</span>
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
+                <div>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '11px', color: '#00d9ff', fontWeight: 'bold', marginBottom: '4px' }}>
+                    <span>Cutoff</span>
+                    <span>{params.cutoff.toFixed(0)} Hz</span>
+                  </div>
+                  <input
+                    type="range"
+                    min="20"
+                    max="20000"
+                    step="10"
+                    value={params.cutoff}
+                    onChange={(e) => setParams({ cutoff: Number(e.target.value) })}
+                    className="master-volume-slider"
+                    style={{ width: '100%' }}
+                  />
                 </div>
-                <input
-                  type="range"
-                  min="20"
-                  max="20000"
-                  step="10"
-                  value={params.cutoff}
-                  onChange={(e) => setParams({ cutoff: Number(e.target.value) })}
-                  className="master-volume-slider"
-                  style={{ width: '100%' }}
-                />
-              </div>
-              <div style={{ marginBottom: '12px' }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '11px', color: '#00d9ff', fontWeight: 'bold', marginBottom: '4px' }}>
-                  <span>Resonance</span>
-                  <span>{params.resonance.toFixed(2)}</span>
+                <div>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '11px', color: '#00d9ff', fontWeight: 'bold', marginBottom: '4px' }}>
+                    <span>Resonance</span>
+                    <span>{params.resonance.toFixed(2)}</span>
+                  </div>
+                  <input
+                    type="range"
+                    min="0.1"
+                    max="30"
+                    step="0.1"
+                    value={params.resonance}
+                    onChange={(e) => setParams({ resonance: Number(e.target.value) })}
+                    className="master-volume-slider"
+                    style={{ width: '100%' }}
+                  />
                 </div>
-                <input
-                  type="range"
-                  min="0.1"
-                  max="30"
-                  step="0.1"
-                  value={params.resonance}
-                  onChange={(e) => setParams({ resonance: Number(e.target.value) })}
-                  className="master-volume-slider"
-                  style={{ width: '100%' }}
-                />
               </div>
-              <div style={{ marginBottom: '12px' }}>
+              <div style={{ marginTop: '12px' }}>
                 <div style={{ fontSize: '11px', color: '#00d9ff', fontWeight: 'bold', marginBottom: '4px' }}>Filter Type</div>
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '6px' }}>
                   {(['lowpass', 'highpass', 'bandpass', 'notch'] as const).map((type) => (
@@ -436,157 +438,155 @@ function App() {
             {/* Envelope Sliders */}
             <div className="synth-section">
               <div className="section-title">Envelope</div>
-              <div style={{ marginBottom: '12px' }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '11px', color: '#00d9ff', fontWeight: 'bold', marginBottom: '4px' }}>
-                  <span>Attack</span>
-                  <span>{(params.attack * 1000).toFixed(1)}ms</span>
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
+                <div>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '11px', color: '#00d9ff', fontWeight: 'bold', marginBottom: '4px' }}>
+                    <span>Attack</span>
+                    <span>{(params.attack * 1000).toFixed(1)}ms</span>
+                  </div>
+                  <input
+                    type="range"
+                    min="0.001"
+                    max="1"
+                    step="0.001"
+                    value={params.attack}
+                    onChange={(e) => setParams({ attack: Number(e.target.value) })}
+                    className="master-volume-slider"
+                    style={{ width: '100%' }}
+                  />
                 </div>
-                <input
-                  type="range"
-                  min="0.001"
-                  max="1"
-                  step="0.001"
-                  value={params.attack}
-                  onChange={(e) => setParams({ attack: Number(e.target.value) })}
-                  className="master-volume-slider"
-                  style={{ width: '100%' }}
-                />
+                <div>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '11px', color: '#00d9ff', fontWeight: 'bold', marginBottom: '4px' }}>
+                    <span>Decay</span>
+                    <span>{(params.decay * 1000).toFixed(1)}ms</span>
+                  </div>
+                  <input
+                    type="range"
+                    min="0.01"
+                    max="1"
+                    step="0.01"
+                    value={params.decay}
+                    onChange={(e) => setParams({ decay: Number(e.target.value) })}
+                    className="master-volume-slider"
+                    style={{ width: '100%' }}
+                  />
+                </div>
               </div>
-              <div style={{ marginBottom: '12px' }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '11px', color: '#00d9ff', fontWeight: 'bold', marginBottom: '4px' }}>
-                  <span>Decay</span>
-                  <span>{(params.decay * 1000).toFixed(1)}ms</span>
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px', marginTop: '12px' }}>
+                <div>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '11px', color: '#00d9ff', fontWeight: 'bold', marginBottom: '4px' }}>
+                    <span>Sustain</span>
+                    <span>{(params.sustain * 100).toFixed(1)}%</span>
+                  </div>
+                  <input
+                    type="range"
+                    min="0"
+                    max="1"
+                    step="0.01"
+                    value={params.sustain}
+                    onChange={(e) => setParams({ sustain: Number(e.target.value) })}
+                    className="master-volume-slider"
+                    style={{ width: '100%' }}
+                  />
                 </div>
-                <input
-                  type="range"
-                  min="0.01"
-                  max="1"
-                  step="0.01"
-                  value={params.decay}
-                  onChange={(e) => setParams({ decay: Number(e.target.value) })}
-                  className="master-volume-slider"
-                  style={{ width: '100%' }}
-                />
-              </div>
-              <div style={{ marginBottom: '12px' }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '11px', color: '#00d9ff', fontWeight: 'bold', marginBottom: '4px' }}>
-                  <span>Sustain</span>
-                  <span>{(params.sustain * 100).toFixed(1)}%</span>
+                <div>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '11px', color: '#00d9ff', fontWeight: 'bold', marginBottom: '4px' }}>
+                    <span>Release</span>
+                    <span>{(params.release * 1000).toFixed(1)}ms</span>
+                  </div>
+                  <input
+                    type="range"
+                    min="0.01"
+                    max="2"
+                    step="0.01"
+                    value={params.release}
+                    onChange={(e) => setParams({ release: Number(e.target.value) })}
+                    className="master-volume-slider"
+                    style={{ width: '100%' }}
+                  />
                 </div>
-                <input
-                  type="range"
-                  min="0"
-                  max="1"
-                  step="0.01"
-                  value={params.sustain}
-                  onChange={(e) => setParams({ sustain: Number(e.target.value) })}
-                  className="master-volume-slider"
-                  style={{ width: '100%' }}
-                />
-              </div>
-              <div style={{ marginBottom: '12px' }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '11px', color: '#00d9ff', fontWeight: 'bold', marginBottom: '4px' }}>
-                  <span>Release</span>
-                  <span>{(params.release * 1000).toFixed(1)}ms</span>
-                </div>
-                <input
-                  type="range"
-                  min="0.01"
-                  max="2"
-                  step="0.01"
-                  value={params.release}
-                  onChange={(e) => setParams({ release: Number(e.target.value) })}
-                  className="master-volume-slider"
-                  style={{ width: '100%' }}
-                />
               </div>
             </div>
 
             {/* LFO Sliders */}
             <div className="synth-section">
               <div className="section-title">LFO</div>
-              <div style={{ marginBottom: '12px' }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '11px', color: '#00d9ff', fontWeight: 'bold', marginBottom: '4px' }}>
-                  <span>Rate</span>
-                  <span>{params.lfoRate.toFixed(2)} Hz</span>
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
+                <div>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '11px', color: '#00d9ff', fontWeight: 'bold', marginBottom: '4px' }}>
+                    <span>Rate</span>
+                    <span>{params.lfoRate.toFixed(2)} Hz</span>
+                  </div>
+                  <input
+                    type="range"
+                    min="0.1"
+                    max="50"
+                    step="0.1"
+                    value={params.lfoRate}
+                    onChange={(e) => setParams({ lfoRate: Number(e.target.value) })}
+                    className="master-volume-slider"
+                    style={{ width: '100%' }}
+                  />
                 </div>
-                <input
-                  type="range"
-                  min="0.1"
-                  max="50"
-                  step="0.1"
-                  value={params.lfoRate}
-                  onChange={(e) => setParams({ lfoRate: Number(e.target.value) })}
-                  className="master-volume-slider"
-                  style={{ width: '100%' }}
-                />
-              </div>
-              <div style={{ marginBottom: '12px' }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '11px', color: '#00d9ff', fontWeight: 'bold', marginBottom: '4px' }}>
-                  <span>Amount (Modulation)</span>
-                  <span>{(params.lfoAmount * 100).toFixed(1)}%</span>
+                <div>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '11px', color: '#00d9ff', fontWeight: 'bold', marginBottom: '4px' }}>
+                    <span>Amount (Modulation)</span>
+                    <span>{(params.lfoAmount * 100).toFixed(1)}%</span>
+                  </div>
+                  <input
+                    type="range"
+                    min="0"
+                    max="1"
+                    step="0.01"
+                    value={params.lfoAmount}
+                    onChange={(e) => setParams({ lfoAmount: Number(e.target.value) })}
+                    className="master-volume-slider"
+                    style={{ width: '100%' }}
+                  />
                 </div>
-                <input
-                  type="range"
-                  min="0"
-                  max="1"
-                  step="0.01"
-                  value={params.lfoAmount}
-                  onChange={(e) => setParams({ lfoAmount: Number(e.target.value) })}
-                  className="master-volume-slider"
-                  style={{ width: '100%' }}
-                />
-              </div>
-            </div>
-
-            {/* Ring Modulation Sliders */}
-            <div className="synth-section">
-              <div className="section-title">Ring Mod</div>
-              <div style={{ marginBottom: '12px' }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '11px', color: '#00d9ff', fontWeight: 'bold', marginBottom: '4px' }}>
-                  <span>Amount</span>
-                  <span>{(params.ringModAmount * 100).toFixed(1)}%</span>
-                </div>
-                <input
-                  type="range"
-                  min="0"
-                  max="1"
-                  step="0.01"
-                  value={params.ringModAmount}
-                  onChange={(e) => setParams({ ringModAmount: Number(e.target.value) })}
-                  className="master-volume-slider"
-                  style={{ width: '100%' }}
-                />
               </div>
             </div>
 
-            {/* Wetness (Reverb/Effect) Slider */}
+            {/* Effects Sliders - Ring Mod, Wetness, Coarseness */}
             <div className="synth-section">
-              <div className="section-title">Wetness</div>
-              <div style={{ marginBottom: '12px' }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '11px', color: '#00d9ff', fontWeight: 'bold', marginBottom: '4px' }}>
-                  <span>Effect Depth</span>
-                  <span>{(params.wetness * 100).toFixed(1)}%</span>
+              <div className="section-title">Effects</div>
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
+                <div>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '11px', color: '#00d9ff', fontWeight: 'bold', marginBottom: '4px' }}>
+                    <span>Ring Mod</span>
+                    <span>{(params.ringModAmount * 100).toFixed(1)}%</span>
+                  </div>
+                  <input
+                    type="range"
+                    min="0"
+                    max="1"
+                    step="0.01"
+                    value={params.ringModAmount}
+                    onChange={(e) => setParams({ ringModAmount: Number(e.target.value) })}
+                    className="master-volume-slider"
+                    style={{ width: '100%' }}
+                  />
                 </div>
-                <input
-                  type="range"
-                  min="0"
-                  max="1"
-                  step="0.01"
-                  value={params.wetness}
-                  onChange={(e) => setParams({ wetness: Number(e.target.value) })}
-                  className="master-volume-slider"
-                  style={{ width: '100%' }}
-                />
+                <div>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '11px', color: '#00d9ff', fontWeight: 'bold', marginBottom: '4px' }}>
+                    <span>Wetness</span>
+                    <span>{(params.wetness * 100).toFixed(1)}%</span>
+                  </div>
+                  <input
+                    type="range"
+                    min="0"
+                    max="1"
+                    step="0.01"
+                    value={params.wetness}
+                    onChange={(e) => setParams({ wetness: Number(e.target.value) })}
+                    className="master-volume-slider"
+                    style={{ width: '100%' }}
+                  />
+                </div>
               </div>
-            </div>
-
-            {/* Coarseness (Waveform Harshness) Slider */}
-            <div className="synth-section">
-              <div className="section-title">Coarseness</div>
-              <div style={{ marginBottom: '12px' }}>
+              <div style={{ marginTop: '12px' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '11px', color: '#00d9ff', fontWeight: 'bold', marginBottom: '4px' }}>
-                  <span>Waveform Harshness</span>
+                  <span>Coarseness</span>
                   <span>{(params.coarseness * 100).toFixed(1)}%</span>
                 </div>
                 <input
